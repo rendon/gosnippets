@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/mediocregopher/radix.v2/redis"
@@ -12,4 +13,10 @@ func main() {
 		log.Fatalf("Couldn't connect to Redis server")
 	}
 	defer client.Close()
+
+	val, err := client.Cmd("HGET", "myht", "car").Str()
+	if err != nil {
+		log.Fatalf("Error retrieving value: %s", err)
+	}
+	fmt.Printf("value = %s", val)
 }
