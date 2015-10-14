@@ -1,3 +1,4 @@
+// Testing how time.Time is marshaled
 package main
 
 import (

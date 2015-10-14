@@ -1,3 +1,4 @@
+// Example to understand how the `_id` field behaves.
 package main
 
 import (
@@ -9,12 +10,12 @@ import (
 )
 
 type Exploration struct {
-	Id      bson.ObjectId `json:"id"       bson:"_id"`
-	Network string        `json:"network"  bson:"network"`
+	Id      bson.ObjectId `bson:"_id"`
+	Network string        `bson:"network"`
 }
 
 func main() {
-	session, err := mgo.Dial("mongodb-server")
+	session, err := mgo.Dial("localhost")
 	if err != nil {
 		log.Fatalf("Could not connect to server: %s", err)
 	}
@@ -34,5 +35,5 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error retrieving exploration: %s", err)
 	}
-	fmt.Printf("%v", r)
+	fmt.Printf("%v\n", r)
 }

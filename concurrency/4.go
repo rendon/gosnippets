@@ -1,3 +1,4 @@
+// Go lang tour: concurrency exercises
 package main
 
 import (
