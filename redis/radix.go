@@ -14,9 +14,9 @@ func main() {
 	}
 	defer client.Close()
 
-	val, err := client.Cmd("HGET", "myht", "car").Str()
+	val, err := client.Cmd("ZCARD", "myxyht").Int64()
 	if err != nil {
 		log.Fatalf("Error retrieving value: %s", err)
 	}
-	fmt.Printf("value = %s", val)
+	fmt.Printf("value = %d", val)
 }
