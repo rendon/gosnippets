@@ -53,14 +53,15 @@ func testMongo(op string, n int) error {
 		return err
 	}
 	defer ms.Close()
+	workers := 4
 	if op == "write" {
 		ch := make(chan int)
-		part := n / 8
-		for i := 0; i < 8; i++ {
+		part := n / workers
+		for i := 0; i < workers; i++ {
 			go testMongoWrite(ms, part, ch)
 		}
-		go testMongoWrite(ms, n%8, ch)
-		for i := 0; i < 9; i++ {
+		go testMongoWrite(ms, n%workers, ch)
+		for i := 0; i < workers+1; i++ {
 			fmt.Printf("Done: %d\n", <-ch)
 		}
 	} else {
