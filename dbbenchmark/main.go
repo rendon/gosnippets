@@ -48,7 +48,10 @@ func testMongoRead(ms *mgo.Session, n int) error {
 }
 
 func testMongo(op string, n int) error {
-	ms, err := mgo.Dial("mongodb-server")
+	//mongodb://[username:password@]host1[
+	pass := os.Getenv("MONGODB_PASS")
+	url := fmt.Sprintf("mongodb://admin:%s@mongodb-server", pass)
+	ms, err := mgo.Dial(url)
 	if err != nil {
 		return err
 	}
